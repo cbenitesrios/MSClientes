@@ -1,5 +1,5 @@
 package com.everis.msclient.model.request;
- 
+
 import com.everis.msclient.model.dto.ClientDTO;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CreateClientRequest {
-	private ClientDTO clientrequest;   
+public class UpdateClientRequest {
+	private ClientDTO updateclient;
+	private String id;
 }
