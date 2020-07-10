@@ -11,9 +11,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ClientDTO { 
-	 private String firstname;
-	 private String lastname;
-	 private String clienttype;
-	 private String clientcode;
+public class ClientDto {
+  private String firstname;
+  private String lastname;
+  private String clienttype;
+  private String clientcode;
 }

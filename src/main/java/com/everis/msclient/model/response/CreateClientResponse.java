@@ -1,7 +1,6 @@
 package com.everis.msclient.model.response;
 
-import com.everis.msclient.model.Client;
-
+import com.everis.msclient.model.Client; 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +11,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CreateClientResponse {
-
-	private Client clientresponse;
+  private Client clientresponse;
 }

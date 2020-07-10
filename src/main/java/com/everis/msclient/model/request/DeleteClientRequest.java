@@ -1,7 +1,6 @@
 package com.everis.msclient.model.request;
 
-import com.everis.msclient.model.dto.ClientDTO;
-
+import com.everis.msclient.model.dto.ClientDto; 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class DeleteClientRequest {
-	private ClientDTO deleteclient;
-	private String id;
+  private ClientDto deleteclient;
+  private String id;
 }
