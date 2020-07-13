@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -18,8 +19,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Client {  
   @Id
   private String id;
+  @Indexed(name = "clientcode", unique = true)
+  private String clientcode;
   private String firstname;
   private String lastname;
-  private String clienttype;
-  private String clientcode;
+  private String clienttype; 
 }

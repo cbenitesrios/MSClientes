@@ -18,13 +18,15 @@ public class MsclientserviceImpl implements MsclientService {
 
   @Override
   public  Mono<Client> createclient(CreateClientRequest createclientrequest) {   
-    return clientrepo.findByClientcode(createclientrequest.getClientrequest().getClientcode())
-                     .defaultIfEmpty(new Client(null,
-                                        createclientrequest.getClientrequest().getFirstname(),
-                                        createclientrequest.getClientrequest().getLastname(),
-                                        createclientrequest.getClientrequest().getClienttype(),
-                                        createclientrequest.getClientrequest().getClientcode() 
-                                        )).flatMap(clientrepo::save);
+    return clientrepo.save(Client.builder()
+                                        .firstname(createclientrequest
+                                                   .getClientrequest().getFirstname())
+                                        .lastname(createclientrequest
+                                                   .getClientrequest().getLastname())
+                                        .clienttype(createclientrequest
+                                                   .getClientrequest().getClienttype())
+                                        .clientcode(createclientrequest
+                                                .getClientrequest().getClientcode()).build());
   }
   
   @Override
@@ -41,7 +43,7 @@ public class MsclientserviceImpl implements MsclientService {
 
   @Override
   public Mono<Client> updateclient(UpdateClientRequest updateclient) { 
-    return  clientrepo.findById(updateclient.getId())
+    return clientrepo.findById(updateclient.getId())
                 .switchIfEmpty(Mono.error(new Exception("No se pudo actualizar")))
                 .flatMap(client -> 
                 clientrepo.save(Client.builder()
