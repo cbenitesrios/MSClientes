@@ -20,6 +20,13 @@
 
 	<dependencies>
 		
+  
+   		 <dependency>
+        	<groupId>io.springfox</groupId>
+        	<artifactId>springfox-boot-starter</artifactId>
+        	<version>3.0.0</version>
+   		 </dependency>
+   		   
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -61,8 +68,23 @@
 				spring-boot-starter-data-mongodb-reactive
 			</artifactId>
 		</dependency>
-	</dependencies>
 
+
+		
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+	</dependencies>
+	<reporting>
+		    <plugins>
+		        <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-jxr-plugin</artifactId>
+		        </plugin>
+		    </plugins>
+		</reporting>
 	<build>
 		<plugins>
 			<plugin>

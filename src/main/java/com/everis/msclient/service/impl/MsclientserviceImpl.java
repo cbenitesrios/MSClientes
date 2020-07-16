@@ -3,34 +3,34 @@ package com.everis.msclient.service.impl;
 import com.everis.msclient.model.Client; 
 import com.everis.msclient.model.request.CreateClientRequest; 
 import com.everis.msclient.model.request.UpdateClientRequest; 
-import com.everis.msclient.repository.MsclientRepository; 
-import com.everis.msclient.service.MsclientService;
+import com.everis.msclient.repository.IClientrepo; 
+import com.everis.msclient.service.IMsclientservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;  
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
  
-@Service
-public class MsclientserviceImpl implements MsclientService {
+@Service 
+public class MsclientserviceImpl implements IMsclientservice {
 
   @Autowired
-  private MsclientRepository clientrepo;
+  private IClientrepo clientrepo;
 
   @Override
-  public  Mono<Client> createclient(CreateClientRequest createclientrequest) {   
+  public  Mono<Client> createclient(final CreateClientRequest cclientrequest) {   
     return clientrepo.save(Client.builder()
-                                        .firstname(createclientrequest
+                                        .firstname(cclientrequest
                                                    .getClientrequest().getFirstname())
-                                        .lastname(createclientrequest
+                                        .lastname(cclientrequest
                                                    .getClientrequest().getLastname())
-                                        .clienttype(createclientrequest
+                                        .clienttype(cclientrequest
                                                    .getClientrequest().getClienttype())
-                                        .clientcode(createclientrequest
+                                        .clientcode(cclientrequest
                                                 .getClientrequest().getClientcode()).build());
   }
   
   @Override
-  public Mono<Client> findclient(String clientcode) { 
+  public Mono<Client> findclient(final String clientcode) { 
     return clientrepo.findByClientcode(clientcode)
                      .switchIfEmpty(Mono.error(new Exception("No se encontro entidad")));
   }
@@ -42,7 +42,7 @@ public class MsclientserviceImpl implements MsclientService {
   }
 
   @Override
-  public Mono<Client> updateclient(UpdateClientRequest updateclient) { 
+  public Mono<Client> updateclient(final UpdateClientRequest updateclient) { 
     return clientrepo.findById(updateclient.getId())
                 .switchIfEmpty(Mono.error(new Exception("No se pudo actualizar")))
                 .flatMap(client -> 
@@ -55,7 +55,7 @@ public class MsclientserviceImpl implements MsclientService {
   }
 
   @Override
-  public Mono<Void> deleteclient(String clientcode) {
+  public Mono<Void> deleteclient(final String clientcode) {
     return clientrepo.findByClientcode(clientcode)
             .switchIfEmpty(Mono.error(new Exception("No se encontro entidad")))
             .flatMap(clientrepo::delete); 
