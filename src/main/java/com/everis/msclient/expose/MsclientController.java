@@ -48,10 +48,10 @@ public class MsclientController {
     return msclientservice.updateclient(updateclient);
   }
 
-  @DeleteMapping("/deleteclient/{clientcode}")
+  @DeleteMapping("/deleteclient/{id}")
   @ResponseStatus(code = HttpStatus.NO_CONTENT)
-  public Mono<Void> deleteclient(@PathVariable final String clientcode) {
-    return msclientservice.deleteclient(clientcode);
+  public Mono<Void> deleteclient(@PathVariable final String id) {
+    return msclientservice.deleteclient(id);
   }
    
   

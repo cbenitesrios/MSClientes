@@ -56,8 +56,8 @@ public class MsclientserviceImpl implements IMsclientservice {
   }
 
   @Override
-  public Mono<Void> deleteclient(final String clientcode) {
-    return clientrepo.findByClientcode(clientcode)
+  public Mono<Void> deleteclient(final String id) {
+    return clientrepo.findById(id)
             .switchIfEmpty(Mono.error(new Exception("No se encontro entidad")))
             .flatMap(clientrepo::delete); 
   } 
