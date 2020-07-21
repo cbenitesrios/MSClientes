@@ -21,7 +21,7 @@ public class Client {
   private String id;
   @Indexed(name = "clientcode", unique = true)
   private String clientcode;
-  private String firstname;
-  private String lastname;
+  private String name; 
   private String clienttype; 
+  private String clientypedesc;
 }

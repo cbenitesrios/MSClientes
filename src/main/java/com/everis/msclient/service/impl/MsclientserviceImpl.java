@@ -3,7 +3,8 @@ package com.everis.msclient.service.impl;
 import com.everis.msclient.model.Client; 
 import com.everis.msclient.model.request.CreateClientRequest; 
 import com.everis.msclient.model.request.UpdateClientRequest; 
-import com.everis.msclient.repository.IClientrepo; 
+import com.everis.msclient.repository.IClientrepo;
+import com.everis.msclient.repository.IClienttyperepo;
 import com.everis.msclient.service.IMsclientservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;  
@@ -15,22 +16,23 @@ public class MsclientserviceImpl implements IMsclientservice {
 
   @Autowired
   private IClientrepo clientrepo;
-
+  @Autowired
+  private IClienttyperepo clientyperepo;
+  	
   @Override
   public  Mono<Client> createclient(final CreateClientRequest cclientrequest) {   
-    return clientrepo.save(Client.builder()
-                                        .firstname(cclientrequest
-                                                   .getClientrequest().getFirstname())
-                                        .lastname(cclientrequest
-                                                   .getClientrequest().getLastname())
-                                        .clienttype(cclientrequest
-                                                   .getClientrequest().getClienttype())
-                                        .clientcode(cclientrequest
-                                                .getClientrequest().getClientcode()).build());
+    return clientyperepo.findByShortdesc(cclientrequest.getClienttype())
+              .switchIfEmpty(Mono.error(new Exception("Client type not found")))
+    	      .flatMap(type->  clientrepo.save(Client.builder() 
+                                        .name(cclientrequest.getName())
+                                        .clientypedesc(type.getDesc())
+                                        .clienttype(cclientrequest.getClienttype())
+                                        .clientcode(cclientrequest.getClientcode())
+                                        .build()));
   }
   
   @Override
-  public Mono<Client> findclient(final String clientcode) { 
+  public Mono<Client> findclient(final String clientcode) {  
     return clientrepo.findByClientcode(clientcode)
                      .switchIfEmpty(Mono.error(new Exception("No se encontro entidad")));
   }
@@ -48,10 +50,9 @@ public class MsclientserviceImpl implements IMsclientservice {
                 .flatMap(client -> 
                 clientrepo.save(Client.builder()
                         .id(updateclient.getId())
-                        .firstname(updateclient.getUpdateclient().getFirstname())
-                        .lastname(updateclient.getUpdateclient().getLastname())
-                        .clientcode(updateclient.getUpdateclient().getClientcode())
-                        .clienttype(updateclient.getUpdateclient().getClienttype()).build()));  
+                        .name(updateclient.getFirstname()) 
+                        .clientcode(updateclient.getClientcode())
+                        .clienttype(updateclient.getClienttype()).build()));  
   }
 
   @Override
