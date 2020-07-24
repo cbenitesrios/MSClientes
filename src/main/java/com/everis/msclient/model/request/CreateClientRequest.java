@@ -12,8 +12,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CreateClientRequest { 
-	  private String name;
-	  private String clienttype;
-	  private String clientcode; 
+public class CreateClientRequest {
+	private String bank;
+	private String name;
+	private String clienttype;
+	private String clientcode; 
 }

@@ -1,6 +1,5 @@
 package com.everis.msclient.model.response;
-
-import com.everis.msclient.model.dto.ClientDto;
+ 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +12,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FindClientResponse {
-  private ClientDto clientresponse;
+  private String clientresponse;
 }

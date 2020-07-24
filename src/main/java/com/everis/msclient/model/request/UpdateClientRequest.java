@@ -13,9 +13,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UpdateClientRequest {
+
   private String id;
+  private String bank;
   private String firstname;
   private String lastname;
   private String clienttype;
   private String clientcode;
+  
 }

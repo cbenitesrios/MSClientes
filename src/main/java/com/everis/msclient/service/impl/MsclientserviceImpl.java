@@ -7,7 +7,9 @@ import com.everis.msclient.repository.IClientrepo;
 import com.everis.msclient.repository.IClienttyperepo;
 import com.everis.msclient.service.IMsclientservice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;  
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
  
@@ -19,11 +21,13 @@ public class MsclientserviceImpl implements IMsclientservice {
   @Autowired
   private IClienttyperepo clientyperepo;
   	
+
   @Override
   public  Mono<Client> createclient(final CreateClientRequest cclientrequest) {   
-    return clientyperepo.findByShortdesc(cclientrequest.getClienttype())
+    return    clientrepo.count()
+    		  .then(clientyperepo.findByShortdesc(cclientrequest.getClienttype()))
               .switchIfEmpty(Mono.error(new Exception("Client type not found")))
-    	      .flatMap(type->  clientrepo.save(Client.builder() 
+    	      .flatMap(type-> clientrepo.save(Client.builder()
                                         .name(cclientrequest.getName())
                                         .clientypedesc(type.getDesc())
                                         .clienttype(cclientrequest.getClienttype())

@@ -19,9 +19,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Client {  
   @Id
   private String id;
-  @Indexed(unique = true)
   private String clientcode;
   private String name; 
   private String clienttype; 
   private String clientypedesc;
+  private String bank;
 }
