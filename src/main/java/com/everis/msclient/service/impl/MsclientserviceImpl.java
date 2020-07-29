@@ -7,8 +7,7 @@ import com.everis.msclient.repository.IClientrepo;
 import com.everis.msclient.repository.IClienttyperepo;
 import com.everis.msclient.service.IMsclientservice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.stereotype.Service; 
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,10 +23,10 @@ public class MsclientserviceImpl implements IMsclientservice {
 
   @Override
   public  Mono<Client> createclient(final CreateClientRequest cclientrequest) {   
-    return    clientrepo.count()
-    		  .then(clientyperepo.findByShortdesc(cclientrequest.getClienttype()))
+    return    clientyperepo.findByShortdesc(cclientrequest.getClienttype())
               .switchIfEmpty(Mono.error(new Exception("Client type not found")))
-    	      .flatMap(type-> clientrepo.save(Client.builder()
+              .flatMap(type-> clientrepo.save(Client
+                                        .builder()
                                         .name(cclientrequest.getName())
                                         .clientypedesc(type.getDesc())
                                         .clienttype(cclientrequest.getClienttype())
@@ -44,7 +43,7 @@ public class MsclientserviceImpl implements IMsclientservice {
   @Override
   public Flux<Client> findallclient() {
     return clientrepo.findAll()
-                     .switchIfEmpty(Mono.error(new Exception("No se encontrontraron resultados")));
+                     .switchIfEmpty(Mono.error(new Exception("No se encontraron resultados")));
   }
 
   @Override
@@ -54,9 +53,11 @@ public class MsclientserviceImpl implements IMsclientservice {
                 .flatMap(client -> 
                 clientrepo.save(Client.builder()
                         .id(updateclient.getId())
-                        .name(updateclient.getFirstname()) 
+                        .bank(updateclient.getBank())
+                        .name(updateclient.getName()) 
+                        .clienttype(updateclient.getClienttype())
                         .clientcode(updateclient.getClientcode())
-                        .clienttype(updateclient.getClienttype()).build()));  
+                        .build()));  
   }
 
   @Override
