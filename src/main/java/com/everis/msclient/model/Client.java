@@ -24,7 +24,7 @@ public class Client {
   private String id;
   private String clientcode;
   private String name;
-  private List<String> bankassociate;
+  private String bankassociate;
   private String clienttype; 
   private String clientypedesc; 
 }

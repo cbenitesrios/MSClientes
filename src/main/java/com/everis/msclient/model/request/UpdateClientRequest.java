@@ -1,7 +1,4 @@
 package com.everis.msclient.model.request;
- 
-import java.util.List;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull; 
 import lombok.AllArgsConstructor;
@@ -21,7 +18,7 @@ public class UpdateClientRequest {
     @NotNull(message = "id")
     private String id;
     @NotNull(message = "bank cant be null")
-	private List<String> bank;
+	private String bank;
     @NotEmpty
     @NotNull(message = "name cant be null")
 	private String name;

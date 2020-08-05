@@ -3,6 +3,7 @@ package com.everis.msclient.expose;
 import com.everis.msclient.model.Bank;
 import com.everis.msclient.model.Client;
 import com.everis.msclient.model.dto.ErrorDto;
+import com.everis.msclient.model.request.ClientListFind;
 import com.everis.msclient.model.request.CreateBankRequest;
 import com.everis.msclient.model.request.CreateClientRequest;
 import com.everis.msclient.model.request.UpdateClientRequest; 
@@ -42,6 +43,7 @@ public class MsclientController {
   @Autowired
   private IMsclientservice msclientservice;
 
+  /*creacion de clientes*/
   @PostMapping("/createclient")
   @ResponseStatus(code = HttpStatus.CREATED)
   public Mono<Client> createClient(@RequestBody final CreateClientRequest cclientrequest) {
@@ -74,6 +76,11 @@ public class MsclientController {
   @ResponseStatus(code = HttpStatus.NO_CONTENT)
   public Mono<Void> deleteclient(@PathVariable final String id) {
     return msclientservice.deleteclient(id);
+  }
+  
+  @PostMapping("/findclientlist") 
+  public Mono<Boolean> findclient(@RequestBody ClientListFind clientlistrequest) {
+    return msclientservice.findclientlist(clientlistrequest);
   }
    
   

@@ -3,6 +3,7 @@ package com.everis.msclient.service;
 
 import com.everis.msclient.model.Bank;
 import com.everis.msclient.model.Client;
+import com.everis.msclient.model.request.ClientListFind;
 import com.everis.msclient.model.request.CreateBankRequest;
 import com.everis.msclient.model.request.CreateClientRequest; 
 import com.everis.msclient.model.request.UpdateClientRequest;
@@ -22,4 +23,5 @@ public interface IMsclientservice {
    
    Mono<Bank> createbank(CreateBankRequest createbankrequest);
  
+   Mono<Boolean> findclientlist(ClientListFind clientlistfind);  
 }
