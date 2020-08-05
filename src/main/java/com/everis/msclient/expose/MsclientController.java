@@ -49,24 +49,24 @@ public class MsclientController {
     return msclientservice.createclient(cclientrequest);
   }  
   
+  /*crear bancos*/
   @PostMapping("/createbank")
   @ResponseStatus(code = HttpStatus.CREATED)
   public Mono<Bank> createbank(@RequestBody final CreateBankRequest bankrequest) {
     return msclientservice.createbank(bankrequest);
   }
   
-  
+  /*crear tipo de clientes*/
   @PostMapping("/createclientype")
   @ResponseStatus(code = HttpStatus.CREATED)
   public Mono<Clienttype> createclientype(@RequestBody final CreateClienttypeRequest typerequest) {
     return msclientservice.createclientype(typerequest);
-  }  
+  }   
   
-  
-  
-  @GetMapping("/findclient/{clientcode}")
-  public Mono<Client> findclient(@PathVariable final String clientcode) {
-    return msclientservice.findclient(clientcode);
+  /*busqueda de clientes*/
+  @GetMapping("/findclient/{id}")
+  public Mono<Client> findclient(@PathVariable final String id) {
+    return msclientservice.findclient(id);
   }
 
   @GetMapping("/findclient") 
