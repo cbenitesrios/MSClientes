@@ -32,7 +32,6 @@ import reactor.core.publisher.Mono;
 public class MsclientController {
 
 
-  //@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler
   public Mono<ErrorDto> exception(ServerHttpResponse response, Exception request) {
 	 response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

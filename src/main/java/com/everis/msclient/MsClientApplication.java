@@ -2,8 +2,7 @@ package com.everis.msclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.web.reactive.config.EnableWebFlux; 
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient; 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
