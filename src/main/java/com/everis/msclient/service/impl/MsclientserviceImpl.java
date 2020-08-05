@@ -4,9 +4,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import com.everis.msclient.model.Bank;
 import com.everis.msclient.model.Client;
+import com.everis.msclient.model.Clienttype;
 import com.everis.msclient.model.request.ClientListFind;
 import com.everis.msclient.model.request.CreateBankRequest;
-import com.everis.msclient.model.request.CreateClientRequest; 
+import com.everis.msclient.model.request.CreateClientRequest;
+import com.everis.msclient.model.request.CreateClienttypeRequest;
 import com.everis.msclient.model.request.UpdateClientRequest;
 import com.everis.msclient.repository.IBankrepo;
 import com.everis.msclient.repository.IClientrepo;
@@ -54,8 +56,8 @@ public class MsclientserviceImpl implements IMsclientservice {
   
   
   @Override
-  public Mono<Client> findclient(final String clientcode) {  
-    return clientrepo.findByClientcode(clientcode);
+  public Mono<Client> findclient(final String id) {  
+    return clientrepo.findById(id);
   }
 
   @Override
@@ -90,6 +92,9 @@ public class MsclientserviceImpl implements IMsclientservice {
 			  .collectList().filter(list-> clientlistfind.getClientcode().size()==list.size()).hasElement();
   }
   
-  
+  @Override
+  public Mono<Clienttype> createclientype(CreateClienttypeRequest createclienttyperequest){
+	  return clientyperepo.save(Clienttype.builder().shortdesc(createclienttyperequest.getShortdesc()).desc(createclienttyperequest.getDesc()).build());
+  }
 
 }
