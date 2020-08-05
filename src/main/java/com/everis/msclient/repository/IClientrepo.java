@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface IClientrepo extends ReactiveMongoRepository<Client, String> { 
   Mono<Client> findByClientcode(String clientcode);
-  Mono<Long> countFindByClientcodeAndBank(String clientcode, String bank);
+ // Mono<Long> countFindByClientcodeAndBank(String clientcode, String bank);
 }

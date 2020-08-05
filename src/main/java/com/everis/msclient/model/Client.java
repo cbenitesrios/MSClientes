@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+
+import java.util.List;
+
+import org.springframework.data.annotation.Id; 
 import org.springframework.data.mongodb.core.mapping.Document;
+ 
 
 
 @Data 
@@ -20,7 +23,8 @@ public class Client {
   @Id
   private String id;
   private String clientcode;
-  private String name; 
+  private String name;
+  private List<String> bankassociate;
   private String clienttype; 
   private String clientypedesc; 
 }
