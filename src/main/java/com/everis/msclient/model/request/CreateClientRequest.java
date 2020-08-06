@@ -14,8 +14,7 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @Getter
-@Setter
-@ToString
+@Setter 
 public class CreateClientRequest {
 	@NotNull(message = "bank cant be null")
 	private String bank;
