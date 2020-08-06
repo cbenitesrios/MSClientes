@@ -55,6 +55,14 @@ public class MsclientController {
     return msclientservice.createbank(bankrequest);
   }
   
+  /*eliminar bancos*/
+  @DeleteMapping("/deletebank/{id}")
+  @ResponseStatus(code = HttpStatus.NO_CONTENT)
+  public Mono<Void> deletebank(@PathVariable final String id) {
+    return msclientservice.deletebank(id);
+  }
+  
+  
   /*crear tipo de clientes*/
   @PostMapping("/createclientype")
   @ResponseStatus(code = HttpStatus.CREATED)

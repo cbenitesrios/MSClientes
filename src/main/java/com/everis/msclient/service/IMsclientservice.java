@@ -23,7 +23,9 @@ public interface IMsclientservice {
   
    Flux<Client> findallclient();
   
-   Mono<Void> deleteclient(String clientcode);
+   Mono<Void> deleteclient(String id);
+   
+   Mono<Void> deletebank(String id);  
    
    Mono<Bank> createbank(CreateBankRequest createbankrequest);
  

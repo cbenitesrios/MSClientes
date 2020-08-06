@@ -54,6 +54,13 @@ public class MsclientserviceImpl implements IMsclientservice {
 			                   .name(createbankrequest.getName()).build()); 
   }
   
+  @Override
+  public Mono<Void> deletebank(final String id) {
+    return bankrepo.findById(id)
+            .switchIfEmpty(Mono.error(new Exception("No se encontro entidad - banco")))
+            .flatMap(bankrepo::delete); 
+  } 
+  
   
   @Override
   public Mono<Client> findclient(final String id) {  
